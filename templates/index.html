@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- !누르고 tap -->
+<html lang="ko">
+<head>
+<!-- 웹 페이지의 보이지 않는 설정 부분
+    제목, 문자 인코딩, css 등을 이안에 적음 -->
+    <meta charset="UTF-8">
+    <title>헬스케어 음성 응답</title>
+    <!-- 브라우저 탭에 표시되는 제목 -->
+</head>
+<body>
+    <!-- 화면에 실제로 보여지는 부분 -->
+    <h1>헬스케어 명령어 입력</h1>
+    <!-- 큰 제목 -->
+    <form method="post">
+        <!-- 사용자가 입력을 받는 폼 -->
+        <input type="text" name="command" placeholder="예 : 혈압측정" required>
+        <!-- name = "command" : Flask에서 입력값을 받을 때 쓰는 이름
+         placeholder : 빈칸에 예시로 보여지는 문장
+         required : 입력이 필수임을 지정 -->
+        <button type="submit">전송</button>
+        <!-- 폼 안에 버튼이 있기때문에 app.py로 입력값 전송 -->
+    </form> 
+
+    {% if message %}
+    <!-- Flask 템플릿 문법 
+     서버에서 넘겨준 message가있으면 아래 내용을 보여주라는 조건문-->
+        <p>{{message}}</p>
+        <!-- Flask에서 전달한 응답 메시지를 웹에 보여줌 -->
+        <audio controls autoplay>
+            <!-- 오디오를 브라우저에서 재생하는 태그
+             controls : 재생/정지버튼 표시
+             autoplay : 페이지 열자마자 자동으로 재생 -->
+            <source src="{{url_for('static', filename='response.mp3')}}" type="audio/mpeg">
+            <!-- 오디오 파일경로 지정
+             Flask에서 static폴더에있는 response.mp3 불러오기 -->
+            브라우저가 오디오를 지원하지않습니다.
+        </audio>
+    {% endif %}
+    <!-- 조건문끝내기 -->
+</body>
+</html>
