@@ -6,3 +6,5 @@ pose_data_20250807_110718.csv
 
 # 특정 폴더 내의 .csv 파일 무시
 data/*.csv
+
+venv/
